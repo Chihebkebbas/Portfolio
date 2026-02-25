@@ -64,7 +64,7 @@ function myMenuFunction() {
     easing: 'ease-in-out'
   });
   
-  srLeft.reveal('.about-info', { delay: 100 });
+  srLeft.reveal('.timeline-item', { interval: 200 });
   srLeft.reveal('.contact-info', { delay: 100 });
   
   const srRight = ScrollReveal({
@@ -75,7 +75,7 @@ function myMenuFunction() {
     easing: 'ease-in-out'
   });
   
-  srRight.reveal('.skills-box', { delay: 100 });
+  srRight.reveal('.skills-box-full', { interval: 200 });
   srRight.reveal('.form-control', { delay: 100 });
   
   // ----- CHANGE ACTIVE LINK ON SCROLL -----

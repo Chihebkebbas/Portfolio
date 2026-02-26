@@ -67,11 +67,13 @@ var typingEffect = new Typed(".typedText", {
 
 // ----- SCROLL REVEAL ANIMATION -----
 const sr = ScrollReveal({
-  origin: 'top',
+  origin: 'bottom',
   distance: '80px',
   duration: 2000,
   reset: true,
-  easing: 'ease-in-out'
+  easing: 'cubic-bezier(0.175, 0.885, 0.32, 1.275)',
+  scale: 0.85,
+  rotate: { x: 20, y: 0, z: 0 }
 });
 
 // -- HOME --
@@ -91,10 +93,12 @@ sr.reveal('.top-header', {});
 // ----- SCROLL REVEAL LEFT/RIGHT ANIMATION -----
 const srLeft = ScrollReveal({
   origin: 'left',
-  distance: '80px',
+  distance: '100px',
   duration: 2000,
   reset: true,
-  easing: 'ease-in-out'
+  easing: 'cubic-bezier(0.175, 0.885, 0.32, 1.275)',
+  scale: 0.85,
+  rotate: { x: 0, y: -20, z: 0 }
 });
 
 srLeft.reveal('.timeline-item', { interval: 200 });
@@ -102,10 +106,12 @@ srLeft.reveal('.contact-info', { delay: 100 });
 
 const srRight = ScrollReveal({
   origin: 'right',
-  distance: '80px',
+  distance: '100px',
   duration: 2000,
   reset: true,
-  easing: 'ease-in-out'
+  easing: 'cubic-bezier(0.175, 0.885, 0.32, 1.275)',
+  scale: 0.85,
+  rotate: { x: 0, y: 20, z: 0 }
 });
 
 srRight.reveal('.skills-box-full', { interval: 200 });

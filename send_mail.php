@@ -31,14 +31,14 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
         // Contenu du mail
         $mail->isHTML(true);
-        $mail->Subject = 'New message from portfolio contact form';
-        $mail->Body    = "<h3>Name: $name</h3><h3>Email: $email</h3><p>Message: $message</p>";
-        $mail->AltBody = "Name: $name\nEmail: $email\nMessage:\n$message";
+        $mail->Subject = 'Nouveau message depuis le portfolio';
+        $mail->Body    = "<h3>Nom: $name</h3><h3>Email: $email</h3><p>Message: $message</p>";
+        $mail->AltBody = "Nom: $name\nEmail: $email\nMessage:\n$message";
 
         $mail->send();
-        echo "<script>alert('Message sent successfully!'); window.location.href='index.html';</script>";
+        echo "<script>alert('Message envoyé avec succès !'); window.location.href='index.html';</script>";
     } catch (Exception $e) {
-        echo "<script>alert('Message could not be sent. Mailer Error: {$mail->ErrorInfo}'); window.location.href='index.html';</script>";
+        echo "<script>alert('Le message n\'a pas pu être envoyé. Erreur: {$mail->ErrorInfo}'); window.location.href='index.html';</script>";
     }
 }
 ?>

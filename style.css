@@ -78,9 +78,19 @@ i {
 
 /* ------- BASE -------- */
 body {
-    background: var(--body-color);
+    background-color: var(--body-color);
     color: var(--color-white);
     overflow-x: hidden;
+}
+
+#canvas-grid {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    z-index: -1;
+    pointer-events: none;
 }
 
 .container {
@@ -538,12 +548,14 @@ h3 {
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
     overflow: hidden;
     transition: 0.4s;
+    padding: 20px;
 }
 
 .project-box>i {
     font-size: 50px;
     color: var(--first-color);
     margin-bottom: 25px;
+    transition: 0.4s;
 }
 
 .project-box>h3 {
@@ -551,37 +563,102 @@ h3 {
     font-weight: 600;
     color: var(--color-white);
     margin-bottom: 10px;
+    transition: 0.4s;
 }
 
 .project-box>label {
-    font-size: 15px;
+    font-size: 14px;
     color: var(--text-color-third);
     text-align: center;
-    padding: 0 10px;
+    transition: 0.4s;
 }
 
 .project-box::after {
     content: "";
     position: absolute;
-    bottom: -100%;
+    top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    background: var(--first-color);
-    transition: 0.4s;
-    z-index: 1;
+    background: rgba(0, 0, 0, 0.7);
+    backdrop-filter: blur(15px);
+    -webkit-backdrop-filter: blur(15px);
     border-radius: 24px;
+    transition: 0.25s ease-in-out;
+    z-index: 1;
+    opacity: 0;
 }
 
 .project-box:hover::after {
-    bottom: 0;
+    opacity: 1;
+}
+
+.project-btn .badge-icon {
+    position: absolute;
+    top: 50%;
+    left: 0;
+    transform: translate(-50%, -50%);
+    font-size: 20px;
+    background: var(--first-color);
+    color: var(--color-white);
+    border-radius: 50%;
+    width: 36px;
+    height: 36px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+    border: 2px solid rgba(255, 255, 255, 0.1);
+    transition: 0.25s ease-in-out;
+}
+
+.project-btn:hover .badge-icon {
+    background: var(--color-white);
+    color: var(--first-color);
+    box-shadow: 0 4px 15px rgba(255, 255, 255, 0.3);
 }
 
 .project-box:hover i,
 .project-box:hover h3,
 .project-box:hover label {
+    z-index: 0;
+}
+
+.project-btn {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) scale(0.9);
+    opacity: 0;
+    z-index: 3;
+    transition: 0.25s ease-in-out;
+    background: rgba(255, 255, 255, 0.15);
+    backdrop-filter: blur(25px);
+    -webkit-backdrop-filter: blur(25px);
     color: var(--color-white);
-    z-index: 2;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    border-radius: 30px;
+    padding: 12px 24px;
+    font-size: 14px;
+    font-weight: 500;
+    cursor: pointer;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    white-space: nowrap;
+    padding-left: 35px;
+}
+
+.project-box:hover .project-btn {
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(1);
+}
+
+.project-btn:hover {
+    background: rgba(255, 255, 255, 0.2);
+    box-shadow: 0 8px 25px rgba(41, 98, 255, 0.2);
 }
 
 /* ----- CONTACT BOX ----- */
@@ -885,4 +962,116 @@ footer {
 .bg-glow-2 {
     top: 50%;
     left: -20vw;
+}
+
+/* ----- MODAL GITHUB ----- */
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0, 0, 0, 0.6);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    align-items: center;
+    justify-content: center;
+}
+
+.modal-content {
+    background-color: rgba(28, 28, 30, 0.9);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 24px;
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.6);
+    padding: 40px;
+    width: 90%;
+    max-width: 450px;
+    text-align: center;
+    position: relative;
+    animation: modalFadeIn 0.3s;
+}
+
+@keyframes modalFadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.close-modal {
+    position: absolute;
+    top: 15px;
+    right: 20px;
+    color: var(--text-color-third);
+    font-size: 28px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.close-modal:hover {
+    color: var(--color-white);
+}
+
+.modal-icon i {
+    font-size: 60px;
+    color: var(--first-color);
+    margin-bottom: 20px;
+}
+
+.modal-content h3 {
+    color: var(--color-white);
+    font-size: 24px;
+    margin-bottom: 15px;
+}
+
+.modal-content p {
+    color: var(--text-color-third);
+    margin-bottom: 30px;
+    font-size: 16px;
+    line-height: 1.6;
+}
+
+.modal-actions {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+}
+
+.btn-cancel {
+    background: transparent;
+    color: var(--color-white);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 30px;
+    padding: 10px 20px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.btn-cancel:hover {
+    background: rgba(255, 255, 255, 0.1);
+}
+
+.btn-confirm {
+    background: var(--first-color);
+    color: var(--color-white);
+    border: none;
+    border-radius: 30px;
+    padding: 10px 20px;
+    cursor: pointer;
+    transition: 0.3s;
+    text-decoration: none;
+}
+
+.btn-confirm:hover {
+    background: var(--first-color-hover);
+    box-shadow: 0 0 15px rgba(41, 98, 255, 0.4);
 }

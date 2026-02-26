@@ -15,15 +15,18 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     $mail = new PHPMailer(true);
 
+    // Charger les variables d'environnement
+    $env = parse_ini_file(__DIR__ . '/.env');
+
     try {
         // Configuration SMTP
         $mail->isSMTP();
-        $mail->Host       = 'smtp.gmail.com'; // serveur SMTP de Gmail
+        $mail->Host       = $env['SMTP_HOST']; // serveur SMTP
         $mail->SMTPAuth   = true;
-        $mail->Username   = 'kebbas.chihebeddine1@gmail.com'; 
-        $mail->Password   = 'agvkbtooblwjvyrn'; // 
+        $mail->Username   = $env['SMTP_USERNAME']; 
+        $mail->Password   = $env['SMTP_PASSWORD']; 
         $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
-        $mail->Port       = 587;
+        $mail->Port       = $env['SMTP_PORT'];
 
         // Expéditeur & destinataire
         $mail->setFrom($email, $name);

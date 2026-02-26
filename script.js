@@ -23,6 +23,39 @@ function headerShadow() {
   }
 }
 
+// ----- THEME TOGGLE -----
+const themeBtn = document.getElementById("theme-button");
+const themeIcon = document.getElementById("theme-icon");
+
+let darkMode = localStorage.getItem("darkMode");
+
+const enableLightMode = () => {
+  document.body.classList.add("light-mode");
+  if (themeIcon) themeIcon.className = "uil uil-sun";
+  localStorage.setItem("darkMode", "disabled");
+};
+
+const disableLightMode = () => {
+  document.body.classList.remove("light-mode");
+  if (themeIcon) themeIcon.className = "uil uil-moon";
+  localStorage.setItem("darkMode", "enabled");
+};
+
+if (darkMode === "disabled") {
+  enableLightMode();
+}
+
+if (themeBtn) {
+  themeBtn.addEventListener("click", () => {
+    darkMode = localStorage.getItem("darkMode");
+    if (darkMode !== "disabled") {
+      enableLightMode();
+    } else {
+      disableLightMode();
+    }
+  });
+}
+
 // ----- TYPING EFFECT -----
 var typingEffect = new Typed(".typedText", {
   strings: ["UI/UX Designer", "Web Developer"],
@@ -185,7 +218,7 @@ class Particle {
   draw() {
     ctx.beginPath();
     ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
-    ctx.fillStyle = baseColor;
+    ctx.fillStyle = document.body.classList.contains("light-mode") ? 'rgba(0, 0, 0, 0.4)' : baseColor;
     ctx.fill();
   }
 }
@@ -234,7 +267,9 @@ function animate() {
       if (distance < connectionDistance) {
         ctx.beginPath();
         const opacity = 1 - (distance / connectionDistance);
-        ctx.strokeStyle = `rgba(255, 255, 255, ${opacity * 0.25})`;
+        ctx.strokeStyle = document.body.classList.contains("light-mode")
+          ? `rgba(0, 0, 0, ${opacity * 0.15})`
+          : `rgba(255, 255, 255, ${opacity * 0.25})`;
         ctx.lineWidth = 1;
         ctx.moveTo(particles[i].x, particles[i].y);
         ctx.lineTo(particles[j].x, particles[j].y);
